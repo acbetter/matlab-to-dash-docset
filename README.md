@@ -15,8 +15,7 @@ Convert MATLAB Help Document to Docset for Dash.app to use.
   ```
 
 3. Run the Python Script. 
-
-   ```python
+   ```shell
    python matlab2docset.py
    ```
 
