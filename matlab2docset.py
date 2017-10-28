@@ -89,6 +89,23 @@ def get_functions(packages: list):
             pass
 
 
+def get_classes(packages: list):
+    """Functions"""
+    for p in packages:
+        package = p[2].replace('/index.html', '')
+        try:
+            page = open(os.path.join(file_path, docs_path, package, 'classeslist.html')).read()
+            soup = BeautifulSoup(page, "lxml")
+            i = [x.find('a') for x in soup.find_all('td', class_='term notranslate') if x.find('a')]
+            for x in i:
+                try:
+                    yield (x.find('code').get_text(), 'Class', os.path.join(x['href'].replace('../', '')))
+                except AttributeError:
+                    pass
+        except FileNotFoundError:
+            pass
+
+
 def write_to_sqlite(doc_set: list):
     conn = sqlite3.connect(os.path.join(file_path, 'matlab.docset/Contents/Resources/docSet.dsidx'))
     cur = conn.cursor()
@@ -111,6 +128,7 @@ if __name__ == '__main__':
     products = select_products()
     docs = []
     docs.extend(get_guides(products))
+    docs.extend(get_classes(products))
     docs.extend(get_examples(products))
     docs.extend(get_functions(products))
     write_to_sqlite(docs)
