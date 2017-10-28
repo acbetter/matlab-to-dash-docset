@@ -2,7 +2,7 @@
 
 Convert MATLAB Help Document to Docset for Dash.app to use.
 
-![image](https://user-images.githubusercontent.com/13360124/31325840-2eed5f30-ac87-11e7-87fb-47c8ef459e33.png)
+![image](https://user-images.githubusercontent.com/13360124/32131274-a56a475e-bbdc-11e7-81e0-c17ed5be342a.png)
 
 ### How to Use?
 
