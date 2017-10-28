@@ -39,49 +39,57 @@ file_path = get_matlab_docset_path()
 docs_path = 'matlab.docset/Contents/Resources/Documents'
 
 
-def get_guides():
+def select_products():
+    """Select which products you need"""
+    page = open(os.path.join(file_path, docs_path, 'documentation-center.html')).read()
+    soup = BeautifulSoup(page, "lxml")
+    i = [x.find('a') for x in soup.find_all('li', class_='product-link') if x.find('a')]
+    return [(x.get_text(), 'Package', os.path.join(x['href'].replace('../', ''))) for x in i]
+
+
+def get_guides(packages: list):
     """Guide"""
-    page = open(os.path.join(file_path, docs_path, 'matlab', 'index.html')).read()
-    soup = BeautifulSoup(page, "lxml")
-    i = soup.find_all('a', class_='corrected_url')
-    # for x in i[1:2]:
-    #     page = open(os.path.join(file_path, docs_path, 'matlab', x['href'])).read()
-    #     soup = BeautifulSoup(page, "lxml")
-    #     j = []
-    #     j.extend([y.find('a') for y in soup.find_all('strong') if not y.find('a').has_attr('target')])
-    #     j.extend([y.find('a') for y in soup.find_all('span', class_='dcenter_c1title') if y.find('a'). \
-    #              has_attr('href')])
-    #     for y in j:
-    #         print(y.get_text(), 'Guide', os.path.join(y['href'].replace('../', '')))
-    #         # yield (y.get_text(), 'Guide', os.path.join(y['href'].replace('../', '')))
-    return [(x.get_text(), 'Guide', os.path.join(x['href'].replace('../', ''))) for x in i]
+    for p in packages:
+        package = p[2].replace('/index.html', '')
+        page = open(os.path.join(file_path, docs_path, p[2])).read()
+        soup = BeautifulSoup(page, "lxml")
+        i = soup.find_all('a', class_='corrected_url')
+        for x in i:
+            yield (x.get_text(), 'Guide', os.path.join(package, x['href'].replace('../', '')))
 
 
-def get_examples():
+def get_examples(packages: list):
     """Examples"""
-    page = open(os.path.join(file_path, docs_path, 'matlab', 'examples.html')).read()
-    soup = BeautifulSoup(page, "lxml")
-    i = [x.find('a') for x in soup.find_all('li', class_='an-example ex12345') if x.find('a')]
-    return [(x.get_text(), 'Sample', os.path.join(x['href'].replace('../', ''))) for x in i]
+    for p in packages:
+        package = p[2].replace('/index.html', '')
+        try:
+            page = open(os.path.join(file_path, docs_path, package, 'examples.html')).read()
+            soup = BeautifulSoup(page, "lxml")
+            i = [x.find('a') for x in soup.find_all('li', class_='an-example ex12345') if x.find('a')]
+            for x in i:
+                yield (x.get_text(), 'Sample', os.path.join(x['href'].replace('../', '')))
+        except FileNotFoundError:
+            pass
 
 
-def get_functions():
+def get_functions(packages: list):
     """Functions"""
-    page = open(os.path.join(file_path, docs_path, 'matlab', 'functionlist.html')).read()
-    soup = BeautifulSoup(page, "lxml")
-    i = [x.find('a') for x in soup.find_all('td', class_='term notranslate') if x.find('a')]
-    return [(x.find('code').get_text(), 'Function', os.path.join(x['href'].replace('../', ''))) for x in i]
+    for p in packages:
+        package = p[2].replace('/index.html', '')
+        try:
+            page = open(os.path.join(file_path, docs_path, package, 'functionlist.html')).read()
+            soup = BeautifulSoup(page, "lxml")
+            i = [x.find('a') for x in soup.find_all('td', class_='term notranslate') if x.find('a')]
+            for x in i:
+                try:
+                    yield (x.find('code').get_text(), 'Function', os.path.join(x['href'].replace('../', '')))
+                except AttributeError:
+                    pass
+        except FileNotFoundError:
+            pass
 
 
-if __name__ == '__main__':
-    docs = []
-    guides = get_guides()
-    examples = get_examples()
-    functions = get_functions()
-    docs.extend(guides)
-    docs.extend(examples)
-    docs.extend(functions)
-
+def write_to_sqlite(doc_set: list):
     conn = sqlite3.connect(os.path.join(file_path, 'matlab.docset/Contents/Resources/docSet.dsidx'))
     cur = conn.cursor()
     try:
@@ -91,9 +99,18 @@ if __name__ == '__main__':
     cur.execute('CREATE TABLE searchIndex(id INTEGER PRIMARY KEY, name TEXT, type TEXT, path TEXT);')
     cur.execute('CREATE UNIQUE INDEX anchor ON searchIndex (name, type, path);')
 
-    for item in docs:
+    for item in doc_set:
         cur.executemany('INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (?,?,?)', [item])
         print(item, end='\n')
 
     conn.commit()
     conn.close()
+
+
+if __name__ == '__main__':
+    products = select_products()
+    docs = []
+    docs.extend(get_guides(products))
+    docs.extend(get_examples(products))
+    docs.extend(get_functions(products))
+    write_to_sqlite(docs)
