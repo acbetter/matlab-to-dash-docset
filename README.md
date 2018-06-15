@@ -8,9 +8,9 @@ Convert MATLAB Help Document to Docset for Dash.app to use.
 
 1. Please use `Python3` and  `macOS`
 
-```shell
-brew install python3
-```
+   ```shell
+   brew install python3
+   ```
 
 2. Install the dependence.
 
