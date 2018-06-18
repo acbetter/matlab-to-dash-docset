@@ -6,34 +6,23 @@ Convert MATLAB Help Document to Docset for Dash.app to use.
 
 ## How to Use?
 
-1. Please use `Python3` and  `macOS`
+Open our [releases page](https://github.com/acbetter/matlab2dash/releases) and download the [binary file (about 10 MB)](https://github.com/acbetter/matlab2dash/releases/download/v1.1/matlab2docset).
 
-   ```shell
-   brew install python3
-   ```
+Then open `Termainal.app` and input this command:
 
-2. Install the dependence.
+```shell
+chmod +x matlab2docset && ./matlab2docset
+```
 
-   ```shell
-   pip3 install beautifulsoup4
-   pip3 install lxml
-   ```
+Please wait for a minutes...
 
-   or change your directory to `matlab2dash/` and use this command:
+[![asciicast](https://asciinema.org/a/187621.png)](https://asciinema.org/a/187621)
 
-   ```shell
-   pip install -r requirements.txt
-   ```
+The script will auto find the `MATLAB.app` which was installed in your computer and create the docset file in your `~/Downloads` directory. The size of the docset file will be about 1.6 GB, so please wait it.
 
-3. Run the Python Script. 
+Why 1.6 GB? Because of the new verison Dash doesn't support `os.symlink` feature, so I can't use system link to link the docset. So the docset file copy all the `MATLAB.app` help documents which is about 1.6 GB...
 
-   ```shell
-   python3 matlab2docset.py
-   ```
-
-4. The script will auto find the `MATLAB.app` which was installed in your computer and create the docset file in your `~/Downloads` directory. The size of the docset file will be limited in 1MB.
-
-## Contact
+## Contact && Bugs Report
 
 Please post bugs and issues on [github](https://github.com/acbetter/matlab2docset/issues). Thank you!
 
