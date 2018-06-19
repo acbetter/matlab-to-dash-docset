@@ -6,7 +6,7 @@ Convert MATLAB Help Document to Docset for Dash.app to use.
 
 ## How to Use?
 
-** Then open `Termainal.app` and input this command if you use [Homebrew](https://brew.sh/):**
+**Open `Termainal.app` and input this command if you use [Homebrew](https://brew.sh/):**
 
 ```shell
 brew tap acbetter/tap && brew install matlab2dash
@@ -29,7 +29,7 @@ Please post bugs and issues on [github](https://github.com/acbetter/matlab2dash/
 
 ## LICENSE
 
-MIT.
+MIT
 
 ## 中文简介
 
