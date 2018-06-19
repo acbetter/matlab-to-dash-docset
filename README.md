@@ -6,12 +6,12 @@ Convert MATLAB Help Document to Docset for Dash.app to use.
 
 ## How to Use?
 
-Open our [releases page](https://github.com/acbetter/matlab2dash/releases) and download the [binary file (about 10 MB)](https://github.com/acbetter/matlab2dash/releases/download/v1.1/matlab2docset).
+Open our [releases page](https://github.com/acbetter/matlab2dash/releases) and download the [binary file (about 10 MB)](https://github.com/acbetter/matlab2dash/releases/download/v1.1/matlab2dash).
 
 Then open `Termainal.app` and input this command:
 
 ```shell
-chmod +x matlab2docset && ./matlab2docset
+chmod +x matlab2dash && ./matlab2dash
 ```
 
 Please wait for a minutes...
@@ -24,7 +24,7 @@ Why 1.6 GB? Because of the new verison Dash doesn't support `os.symlink` feature
 
 ## Contact && Bugs Report
 
-Please post bugs and issues on [github](https://github.com/acbetter/matlab2docset/issues). Thank you!
+Please post bugs and issues on [github](https://github.com/acbetter/matlab2dash/issues). Thank you!
 
 ## LICENSE
 

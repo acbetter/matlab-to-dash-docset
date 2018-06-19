@@ -26,7 +26,7 @@ def get_matlab_docset_path():
     else:
         matlab_version = matlab_version[0]
         print('Auto-script find only one matlab: {}'.format(matlab_version))
-    print('Building index... Please Wait...')
+    print('\nBuilding index... It may take a long time... Please wait for a minute...\n')
 
     docs_src_path = os.path.join('/Applications', matlab_version, 'help')
     download_path = os.path.join('/Users', getpass.getuser(), 'Downloads')
