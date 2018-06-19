@@ -6,17 +6,18 @@ Convert MATLAB Help Document to Docset for Dash.app to use.
 
 ## How to Use?
 
-Open our [releases page](https://github.com/acbetter/matlab2dash/releases) and download the [binary file (about 10 MB)](https://github.com/acbetter/matlab2dash/releases/download/v1.1/matlab2dash).
+Open our [releases page](https://github.com/acbetter/matlab2dash/releases) and download the [binary file (about 10 MB)](https://github.com/acbetter/matlab2dash/releases/download/v1.2/matlab2dash).
 
-Then open `Termainal.app` and input this command:
+Then open `Termainal.app` and input this command if you use [Homebrew](https://brew.sh/):
 
 ```shell
-chmod +x matlab2dash && ./matlab2dash
+brew tap acbetter/tap && brew install matlab2dash
+matlab2dash
 ```
 
 Please wait for a minutes...
 
-[![asciicast](https://asciinema.org/a/187621.png)](https://asciinema.org/a/187621)
+[![asciicast](https://asciinema.org/a/187769.png)](https://asciinema.org/a/187769)
 
 The script will auto find the `MATLAB.app` which was installed in your computer and create the docset file in your `~/Downloads` directory. The size of the docset file will be about 1.6 GB, so please wait it.
 
