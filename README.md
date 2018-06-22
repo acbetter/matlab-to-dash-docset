@@ -21,11 +21,11 @@ The script will auto find the `MATLAB.app` which was installed in your computer 
 
 > Why 1.6 GB? Because of the new verison Dash doesn't support `os.symlink` feature, so I can't use system link to link the docset. So the docset file copy all the `MATLAB.app` help documents which is about 1.6 GB...
 
-> If you don't use [Homebrew](https://brew.sh/), please open our [releases page](https://github.com/acbetter/matlab2dash/releases) and download the [binary file (about 10 MB)](https://github.com/acbetter/matlab2dash/releases/download/v1.2/matlab2dash). Then you can use the command `chmod +x matlab2dash && ./matlab2dash` to run it after you have changed your directory.
+> If you don't use [Homebrew](https://brew.sh/), please open our [releases page](https://github.com/acbetter/matlab-to-dash-docset/releases) and download the [binary file (about 10 MB)](https://github.com/acbetter/matlab-to-dash-docset/releases/download/v1.2/matlab2dash). Then you can use the command `chmod +x matlab2dash && ./matlab2dash` to run it after you have changed your directory.
 
 ## Contact and Bugs Report
 
-Please post bugs and issues on [github](https://github.com/acbetter/matlab2dash/issues). Thank you!
+Please post bugs and issues on [github](https://github.com/acbetter/matlab-to-dash-docset/issues). Thank you!
 
 ## LICENSE
 
