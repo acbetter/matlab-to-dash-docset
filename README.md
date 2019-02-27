@@ -1,6 +1,7 @@
 # MATLAB to Dash Docset
 
 Convert MATLAB Help Document to Docset for Dash.app to use.
+**Supported MATLAB Version: R2015a-R2018a**
 
 ![image](https://user-images.githubusercontent.com/13360124/32131274-a56a475e-bbdc-11e7-81e0-c17ed5be342a.png)
 
